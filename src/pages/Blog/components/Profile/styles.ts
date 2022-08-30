@@ -41,7 +41,9 @@ export const Title = styled.div`
   display: flex;
   justify-content: space-between;
 
-  color: ${props => props.theme.title};
+  h1 {
+    font-size: 1.5rem;
+  }
 
   a { 
     font-size: .75rem;

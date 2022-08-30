@@ -4,7 +4,7 @@ export const Header = styled.header`
   position: relative;
   
   > img {
-    width: 100vw;
+    width: 100%;
     height: 296px;
   }
 

@@ -17,6 +17,10 @@ export const GlobalStyle = createGlobalStyle`
     line-height: 160%;
   }
 
+  h1, h2, h3 {
+    color: ${props => props.theme['title']};
+  }
+
   :focus {
     outline: 0;
     box-shadow: 0 0 0 2px ${(props) => props.theme['blue']}; 

@@ -11,7 +11,7 @@ export function Profile() {
       <Avatar src="https://www.github.com/brunobecoski.png"/>
       <div>
         <Title>
-          <h2>Bruno Becoski</h2>
+          <h1>Bruno Becoski</h1>
           <NavLink to="#">
             GITHUB
             <FontAwesomeIcon icon={faArrowUpRightFromSquare} />

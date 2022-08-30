@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const BlogContainer = styled.main`
-  max-width: 864px;
+  max-width: calc(864px + 2rem);
   margin-inline: auto;
   padding-inline: 1rem;
 `;
@@ -25,4 +25,12 @@ export const Title = styled.div`
   @media (max-width: 900px) {
     margin-top: -3rem;
   }
+`;
+
+export const Cards = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap : 2rem;
+  margin-block: 3rem;
 `;
