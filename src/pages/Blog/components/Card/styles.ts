@@ -2,8 +2,7 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const CardContainer = styled(NavLink)`
-  max-width: 412px;
-  max-height: 260px;
+  width: 412px;
   padding: 2rem;
 
   text-decoration: none;
@@ -28,7 +27,11 @@ export const CardContainer = styled(NavLink)`
     
     span {
       font-size: .875rem;
-      color: ${props => props.theme['span']}
+      color: ${props => props.theme['span']};
+      
+      ::first-letter {
+        text-transform: uppercase;
+      }
     }
   }
 
@@ -39,5 +42,13 @@ export const CardContainer = styled(NavLink)`
     overflow: hidden;
 
     color: ${props => props.theme['text']};
+  }
+
+  @media (max-width: 900px) {
+    width: 100%;
+
+    div {
+      flex-direction: column;
+    }
   }
 `;
