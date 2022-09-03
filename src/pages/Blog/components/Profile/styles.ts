@@ -21,12 +21,6 @@ export const ProfileContainer = styled.div`
     flex-direction: column;    
     align-items: center;
     transform: translateY(-18%);
-    
-    > div {
-      p {
-        text-align: center;
-      }
-    }
   }
 `;
 
@@ -62,12 +56,8 @@ export const Title = styled.div`
   }
 
   @media (max-width: 900px) {
-    flex-direction: column;
     align-items: center;
-
-    a {
-      margin-top: .5rem;
-    }
+    margin-bottom: 1rem;
   }
 `;
 
@@ -86,6 +76,5 @@ export const Info = styled.div`
 
   @media (max-width: 900px) {
     flex-direction: column;
-    align-items: center;
   }
 `;
