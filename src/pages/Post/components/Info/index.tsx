@@ -20,7 +20,7 @@ export function Info() {
         </a>
       </NavBar>
 
-      <h2>JavaScript data types and data structures</h2>
+      <h2>Boas práticas para devs em início de carreira</h2>
 
       <InfoBar>
         <div>
