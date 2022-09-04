@@ -21,7 +21,7 @@ export function Card({ issue }: CardProps) {
   });
 
   return (
-    <CardContainer to="#">
+    <CardContainer to={`/post/${issue.number}`}>
       <div>
         <h2>{issue.title}</h2>
         <span>{dateFormatted}</span>

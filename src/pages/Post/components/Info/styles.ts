@@ -52,8 +52,6 @@ export const NavBar = styled.div`
       }
     }
   }
-
-
 `;
 
 export const InfoBar = styled.div`
@@ -66,6 +64,14 @@ export const InfoBar = styled.div`
     svg {
       margin-right: .5rem;
       color: ${props => props.theme['label']};
+    }
+    
+    span {
+      display: inline-block;
+
+      ::first-letter {
+        text-transform: uppercase;
+      }
     }
   }
 
