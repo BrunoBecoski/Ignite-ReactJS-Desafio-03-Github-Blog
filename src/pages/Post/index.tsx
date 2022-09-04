@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { api } from '../../lib/axios';
+import { Loading } from '../../components/Loading';
 import { Info } from './components/Info';
 import { Content } from './components/Content';
 
@@ -45,11 +46,14 @@ export function Post() {
   return (
     <PostContainer>
       {
-        !isLoading &&
-        <>
-          <Info content={infoContent} />
-          <Content body={body} />
-        </>
+        isLoading 
+        ?
+          <Loading />
+        :
+          <>
+            <Info content={infoContent} />
+            <Content body={body} />
+          </>
       }
     </PostContainer>
   );
