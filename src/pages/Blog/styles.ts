@@ -33,4 +33,22 @@ export const Cards = styled.div`
   flex-wrap: wrap;
   gap : 2rem;
   margin-block: 3rem;
+
+  .loading {
+    display: flex;
+    flex-wrap: nowrap;
+    gap : 2rem;
+    width: 100%;
+  
+    div {
+      transform: translateY(0);
+      height: 260px;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .loading {
+      flex-wrap: wrap;
+    }
+  }
 `;

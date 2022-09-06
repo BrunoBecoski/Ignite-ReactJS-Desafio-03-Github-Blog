@@ -4,6 +4,7 @@ import { faArrowUpRightFromSquare, faBuilding, faUserGroup } from '@fortawesome/
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 import { api } from '../../../../lib/axios';
+import { Loading } from '../../../../components/Loading';
 
 import { Avatar, ProfileContainer, Title, Info } from './styles';
 
@@ -19,26 +20,34 @@ interface User {
 
 export function Profile() {
   const [user, setUser] = useState({} as User);
+  const [isLoadingUser, setIsLoadingUser] = useState(true);
+
   const username = 'brunobecoski';
   
+  async function fetchUser() {
+    const { data } = await api.get(`users/${username}`);
+    const { login, avatar_url, html_url, name, company, bio, followers } = data;
+
+    setUser({
+      avatar_url,
+      name,
+      html_url,
+      bio,
+      login,
+      company,
+      followers,
+    });
+
+    setIsLoadingUser(false);
+  }
+
   useEffect(() => {
-    async function fetchUser() {
-      const { data } = await api.get(`users/${username}`);
-      const { login, avatar_url, html_url, name, company, bio, followers } = data;
-
-      setUser({
-        avatar_url,
-        name,
-        html_url,
-        bio,
-        login,
-        company,
-        followers,
-      })
-    }
-
     fetchUser();
   }, []);
+
+  if (isLoadingUser) {
+    return <Loading />
+  }
 
   return (
     <ProfileContainer>
