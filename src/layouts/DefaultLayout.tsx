@@ -1,6 +1,6 @@
 import { NavLink, Outlet } from 'react-router-dom';
 
-import { Header } from './styles';
+import { Header, Main } from './styles';
 
 import coverImg from '../assets/cover.png';
 import logoImg from '../assets/logo.svg';
@@ -16,7 +16,9 @@ export function DefaultLayout() {
         </NavLink>  
       </Header>
 
-      <Outlet />
+      <Main>
+        <Outlet />
+      </Main>
     </>
   );
 }

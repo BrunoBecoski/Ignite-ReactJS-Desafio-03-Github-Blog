@@ -3,7 +3,8 @@ import styled from "styled-components";
 export const LoadingContainer = styled.div`
   width: 100%;
   height: 200px;
-  transform: translateY(-48%);
+  transform: translateY(-50%);
+
 
   border-radius: 10px;
   color: transparent;
