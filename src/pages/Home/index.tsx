@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { api } from '../../lib/axios';
-import { InfoBanner } from '../../components/InfoBanner';
+import { Banner } from '../../components/Banner';
 import { Card } from '../../components/Card';
 import { Input } from '../../components/Input';
 
@@ -10,7 +10,7 @@ import { HomeContainer, Cards } from './styles';
 import { Loading } from '../../components/Loading';
 
 interface UserInfo {
-  avatar_url: string;
+  avatarUrl: string;
   login: string;
 }
 
@@ -23,9 +23,9 @@ export function Home() {
   async function fetchUsers() {
     const { data } = await api.get(`/search/users?q=${search}`);
     
-    const users = data.items.map((user: UserInfo) => {
+    const users = data.items.map((user: any) => {
     return {
-      avatar_url: user.avatar_url,
+      avatarUrl: user.avatar_url,
       login: user.login
     }}
     )
@@ -49,8 +49,8 @@ export function Home() {
 
   return (
     <HomeContainer>
-      <InfoBanner
-        user={{
+      <Banner
+        home={{
           title: 'Pesquise por alguma conta do Github'
         }}
       />
@@ -69,10 +69,7 @@ export function Home() {
             users.map(user => 
               <Card 
                 key={user.login}
-                user={{
-                  avatarUrl: user.avatar_url,
-                  login: user.login,
-                }}
+                user={user}
               />
             )
         }
