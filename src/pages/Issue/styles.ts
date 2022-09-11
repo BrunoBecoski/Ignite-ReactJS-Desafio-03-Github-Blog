@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 
-export const ContentContainer = styled.div`
+export const PostContainer = styled.main`
+  max-width: calc(864px + 2rem);
+  margin-inline: auto;
+  padding-inline: 1rem;
+`;
+
+export const Content = styled.div`
   margin-top: -5rem;
   padding: 2rem;
 
