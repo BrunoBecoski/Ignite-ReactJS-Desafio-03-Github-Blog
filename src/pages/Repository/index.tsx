@@ -1,45 +1,62 @@
 import { useEffect, useState } from 'react';
 
 import { api } from '../../lib/axios';
+import { Banner } from '../../components/Banner';
+import { Card } from '../../components/Card';
 import { Loading } from '../../components/Loading';
-import { Header } from './components/Header';
 import { Input } from '../../components/Input';
-import { Card } from './components/Card';
 
 import { BlogContainer, Title, Cards } from './styles';
+import { useParams } from 'react-router-dom';
+
+interface RepositoryInfo {
+  name: string;
+  createdAt: string;
+  htmlUrl: string;
+  description: string;
+  stargazersCount: number;
+  openIssues: number;
+}
 
 interface Issue {
   title: string;
-  created_at: string;
+  createdAt: string;
   body: string;
   number: number;
 }
 
-interface IssuesResponse {
-  items: Issue[];
-}
-
 export function Repository() {
-  const [issues, setIssues] = useState<Issue[]>([]);
+  const { user, repository } = useParams();
+
   const [search, setSearch] = useState('');
+  const [repositoryInfo, setRepositoryInfo] = useState({} as RepositoryInfo);
+  const [isLoadingRepositoryInfo, setIsLoadingRepositoryInfo] = useState(true);
   const [isLoadingIssues, setIsLoadingIssues] = useState(true);
-
-
+  const [issues, setIssues] = useState<Issue[]>([]);
   const [firstRender, setFirstRender] = useState(true);
 
-  const username = 'rocketseat-education';
-  const repo = 'reactjs-github-blog-challenge'
-  // const repo = 'bootcamp-gostack-desafios';
-  
-  async function fetchIssues() {
-    const response = await api.get<IssuesResponse>(`/search/issues?q=${search}%20repo:${username}/${repo}`);
-    const { data } = response;
+  async function fetchRepository() {
+    const { data } = await api.get(`repos/${user}/${repository}`);
 
-    const issuesItems = data.items.map((issue) => (
+    setRepositoryInfo({
+      name: data.name,
+      createdAt: data.created_at,
+      htmlUrl: data.html_url,
+      description: data.description,
+      stargazersCount: data.stargazers_count,
+      openIssues: data.open_issues,
+    });
+    setIsLoadingRepositoryInfo(false);
+  }
+
+  async function fetchIssues() {
+    const { data } = await api.get(`/search/issues?q=${search}%20repo:${user}/${repository}`);
+
+    const issuesItems = data.items.map((issue: any) => (
       {
         number: issue.number,
         title: issue.title,
-        created_at: issue.created_at,
+        createdAt: issue.created_at,
         body: issue.body,
       }
     ));
@@ -49,6 +66,7 @@ export function Repository() {
   }
 
   useEffect(() => {
+    fetchRepository();
     fetchIssues();
   }, []);
 
@@ -59,15 +77,23 @@ export function Repository() {
     } else {
       const timeout = setTimeout(async () => {
         fetchIssues();
-      }, 5000);
+      }, 3000);
   
       return () => clearTimeout(timeout);
     }  
-  }, [search])
+  }, [search]);
 
   return (
     <BlogContainer>
-      <Header />
+      {
+        isLoadingRepositoryInfo
+          ?
+          <Loading />
+          :
+          <Banner 
+            repository={repositoryInfo}
+          />
+      }
 
       <Title>
         <h3>Publicações</h3>

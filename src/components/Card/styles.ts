@@ -27,6 +27,10 @@ export const CardContainer = styled(NavLink)`
   
   p {
     margin-bottom: 1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   :hover {
