@@ -1,7 +1,7 @@
-import { faCalendarDay, faCircleDot } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { format, formatDistanceToNow } from 'date-fns';
 import pt_BR from 'date-fns/locale/pt-BR';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendarDay, faCircleDot } from '@fortawesome/free-solid-svg-icons';
 
 import { CardContainer, Avatar, Header, Content } from './styles';
 
@@ -26,8 +26,10 @@ export function Card({ user, repository }: CardProps) {
   if (user) {
     return (
       <CardContainer to={user.login}>
-        <Avatar src={user.avatarUrl} />
-        <h3>{user.login}</h3>
+        <Header className="home">
+          <Avatar src={user.avatarUrl} />
+          <h3>{user.login}</h3>
+        </Header>
       </CardContainer>
     );
   }

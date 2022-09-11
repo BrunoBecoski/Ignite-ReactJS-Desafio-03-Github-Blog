@@ -1,6 +1,7 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faArrowUpRightFromSquare, faBuilding, faUserGroup } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import { Avatar, Header, Info, InfoBannerContainer } from './styles';
 
 type Home = {
@@ -16,7 +17,6 @@ type User = {
   name: string;
   login: string;
 }
-
 
 interface BannerProps {
   home?: Home;

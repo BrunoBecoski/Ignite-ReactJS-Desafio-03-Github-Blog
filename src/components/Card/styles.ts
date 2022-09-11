@@ -26,7 +26,7 @@ export const CardContainer = styled(NavLink)`
   }
   
   p {
-    margin-block: 1rem;
+    margin-bottom: 1rem;
   }
 
   :hover {
@@ -50,6 +50,7 @@ export const Avatar = styled.img`
 export const Header = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
   gap: 1rem;
 
@@ -63,6 +64,16 @@ export const Header = styled.div`
       ::first-letter {
         text-transform: uppercase;
       }
+    }
+  }
+
+  @media (max-width: 900px) {
+    flex-direction: column;
+    align-items: baseline;
+
+    &.home {
+      flex-direction: row;
+      align-items: center;
     }
   }
 `;

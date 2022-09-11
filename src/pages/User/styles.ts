@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const UserContainer = styled.main``;
 
@@ -12,6 +12,11 @@ export const Cards = styled.div`
   .loading {
     width: calc(50% - 1rem);
     transform: translateX(0);
+  }
 
+  @media (max-width: 900px) {
+    .loading {
+      width: 100%;
+    }
   }
 `;

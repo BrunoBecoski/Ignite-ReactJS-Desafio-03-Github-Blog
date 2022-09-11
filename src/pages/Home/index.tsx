@@ -64,7 +64,10 @@ export function Home() {
         {
           isLoadingUsers 
           ? 
-            <Loading />
+            <>
+              <Loading />
+              <Loading />
+            </>
           :
             users.map(user => 
               <Card 

@@ -4,10 +4,10 @@ import { useParams } from 'react-router-dom';
 import { api } from '../../lib/axios';
 import { Banner } from '../../components/Banner';
 import { Input } from '../../components/Input';
-
-import { Cards, UserContainer } from './styles';
 import { Loading } from '../../components/Loading';
 import { Card } from '../../components/Card';
+
+import { Cards, UserContainer } from './styles';
 
 interface UserInfo {
   avatarUrl: string;
@@ -26,16 +26,15 @@ interface Repository {
   issues: number,
 }
 
-
 export function User() {
   const { user } = useParams();
 
+  const [search, setSearch] = useState('');
   const [userInfo, setUserInfo] = useState({} as UserInfo);
   const [isLoadingUserInfo, setIsLoadingUserInfo] = useState(true);
   const [isLoadingRepositories, setIsLoadingRepositories] = useState(true);
-  const [isFirstRender, setIsFirstRender] = useState(true);
-  const [search, setSearch] = useState('');
   const [repositories, setRepositories] = useState<Repository[]>([]);
+  const [searchedRepositories, setSearchedRepositories] = useState<Repository[]>([]);
 
   async function fetchUser() {
     const { data } = await api.get(`/users/${user}`);
@@ -52,13 +51,8 @@ export function User() {
     setIsLoadingUserInfo(false);
   }
 
-  useEffect(() => {
-    fetchUser();
-    fetchRepositories();
-  }, []);
-
   async function fetchRepositories() {
-    const { data } = await api.get(`/users/${user}/repos?per_page=100`);
+    const { data } = await api.get(`/users/${user}/repos?per_page=100&sort=created`);
 
     const repositoriesFilter = data.filter((repository: any) => repository.open_issues >= 1);
 
@@ -74,6 +68,28 @@ export function User() {
     setRepositories(repositoriesMap);
     setIsLoadingRepositories(false);
   }
+
+  function searchRepository() {
+    const regex = new RegExp("" + search.toLocaleLowerCase() + "");
+    const result = repositories.filter(repository => regex.test(repository.name.toLocaleLowerCase()));
+
+    setSearchedRepositories(result);
+    setIsLoadingRepositories(false);
+  }
+  
+  useEffect(() => {
+    fetchUser();
+    fetchRepositories();
+  }, []);
+
+  useEffect(() => {
+    setIsLoadingRepositories(true);
+      const timeout = setTimeout( () => {
+        searchRepository();
+      }, 500);
+  
+      return () => clearTimeout(timeout);    
+  }, [search]);
 
   return (
     <UserContainer>
@@ -100,6 +116,16 @@ export function User() {
                 <Loading />
                 <Loading />
               </>
+            :
+
+            search
+            ? 
+              searchedRepositories.map(repository =>
+                <Card
+                  key={repository.name}
+                  repository={repository}
+                />
+              )
             :
               repositories.map(repository =>
                 <Card
